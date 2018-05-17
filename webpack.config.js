@@ -21,8 +21,8 @@ module.exports = {
   // ],
   // output为输出 path代表路径 filename代表文件名称
   output: {
-    path: path.join(__dirname, 'bundle.[hash:8].js'), // 打包名称一直一样很容易造成缓存问题,添加hash值每次生成的都是不同的的文件名
-    filename: 'bundle.js',
+    path: path.join(__dirname, 'bundle'), // 打包名称一直一样很容易造成缓存问题,添加hash值每次生成的都是不同的的文件名
+    filename: 'bundle.[hash:8].js',
     chunkFilename: '[name].[chunkhash:8].js'
     // (chunk:被entry所依赖的额外的代码块,可以包含一个或多个文件) 指定好生成文件的名字,
     // 以及想抽取哪些入口js文件的公共代码,webpack会自动帮我们合并好
@@ -31,10 +31,9 @@ module.exports = {
   // test:处理什么类型的文件,use:用什么,include:处理这里的,exclude:不处理这里的
   module: {
     rules: [{
-      test: /\.js$/,
+      test: /\.js|jsx$/,
       use: ['babel-loader'],
-      include: path.join(__dirname, 'src'),
-      exclude: /node_modules/
+      include: path.join(__dirname, 'src')
     }, {
       test: /\.less$/,
       use: ExtractTextPlugin.extract({
